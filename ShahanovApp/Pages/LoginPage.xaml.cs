@@ -31,7 +31,7 @@ namespace ShahanovApp.Pages
             if(userdata != null)
             {
 
-                MessageBox.Show("Авторизация прошла успешно!");
+                MessageBox.Show("Авторизация прошла успешнgо!");
                 Service.NavService.NavClass.Navigate(new InfoPage());
             }
             else
