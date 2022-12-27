@@ -1,0 +1,110 @@
+﻿<Page x:Class="ShahanovApp.Pages.InfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ShahanovApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="InfoPage">
+
+    <Grid>
+        <TabControl Background="AliceBlue"   >
+            <TabItem Header="Cотрудники"   >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Фильтр:" FontSize="18" VerticalAlignment="Center" ></TextBlock>
+                        <ComboBox  SelectionChanged="СomboDeps_SelectionChanged" Background="Beige" Width="200" Grid.Row="0" FontSize="18" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignComboBox}" Margin="10" x:Name="СomboDeps"></ComboBox>
+
+                    </StackPanel>
+                    <DataGrid x:Name="EmployeDgData"   AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="#" Binding="{Binding id_emp}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="ФИО" Binding="{Binding FIO}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Должность" Binding="{Binding Post.PostName}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Департамент" Binding="{Binding Departament.NameDepartament}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Стаж" Binding="{Binding Experience}"></DataGridTextColumn>
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Width="50" Height="50" VerticalAlignment="Center" Background="Transparent">
+                                            <Image Source="../images/editicon.png"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Width="50" Height="50" VerticalAlignment="Center" Background="Transparent" Click="Button_Click">
+                                            <Image Source="../images/deleteicon.png"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Департаменты"   >
+                <DataGrid x:Name="DepartamentDgData" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Binding="{Binding id_dep}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Название департамента" Binding="{Binding NameDepartament}" Width="*"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="50" Height="50" VerticalAlignment="Center" Background="Transparent">
+                                        <Image Source="../images/editicon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="50" Height="50" VerticalAlignment="Center" Background="Transparent">
+                                        <Image Source="../images/deleteicon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem  Header="Должности" Width="auto">
+                <DataGrid x:Name="PostDgData" AutoGenerateColumns="False" IsReadOnly="True" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="#" Binding="{Binding id_post}" Width="*"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Название должности" Binding="{Binding PostName}" Width="*"></DataGridTextColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="50" Height="50" VerticalAlignment="Center" Background="Transparent">
+                                        <Image Source="../images/editicon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Width="50" Height="50" VerticalAlignment="Center" Background="Transparent">
+                                        <Image Source="../images/deleteicon.png"></Image>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

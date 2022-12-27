@@ -1,0 +1,31 @@
+﻿<Window x:Class="ShahanovApp.Pages.Windows.AddEditEmploye"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShahanovApp.Pages.Windows"
+        mc:Ignorable="d"
+        Title="AddEditEmploye" Height="550" Width="400"
+        xmlns:materialDesign="https://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="379*"/>
+            <RowDefinition Height="55*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Имя" Margin="0,10,0,0" FontSize="25" FontWeight="DemiBold"></TextBlock>
+            <TextBox FontSize="20" Margin="0,0,0,5" FontWeight="DemiBold" x:Name="FirstNameTxb"></TextBox>
+            <TextBlock Text="Фамилия" FontSize="25" FontWeight="DemiBold"></TextBlock>
+            <TextBox FontSize="20" Margin="0,0,0,5" FontWeight="DemiBold" x:Name="SecondNameTxb"></TextBox>
+            <TextBlock Text="Отчество" FontSize="25" FontWeight="DemiBold"></TextBlock>
+            <TextBox FontSize="20" Margin="0,0,0,5" FontWeight="DemiBold" x:Name="PatronymicNameTxb"></TextBox>
+            <TextBlock Text="Должность" FontSize="25" FontWeight="DemiBold"></TextBlock>
+            <ComboBox FontSize="20" Margin="0,0,0,5" FontWeight="DemiBold" x:Name="cmbPost" DisplayMemberPath="PostName"></ComboBox>
+            <TextBlock Text="Департамент" FontSize="25" FontWeight="DemiBold"></TextBlock>
+            <ComboBox FontSize="20" Margin="0,0,0,5" FontWeight="DemiBold" x:Name="cmbDep" DisplayMemberPath="NameDepartament"></ComboBox>
+            <TextBlock Text="Стаж" FontSize="25" FontWeight="DemiBold"></TextBlock>
+            <TextBox FontSize="20"  FontWeight="DemiBold" x:Name="StajTxb"></TextBox>
+        </StackPanel>
+        <Button Grid.Row="1" Background="Purple" Click="Button_Click" Content="Добавить сотрудника" Foreground="White"></Button>
+    </Grid>
+</Window>

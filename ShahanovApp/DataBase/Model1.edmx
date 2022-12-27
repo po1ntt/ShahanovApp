@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ShahanovModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departament">
+          <Key>
+            <PropertyRef Name="id_dep" />
+          </Key>
+          <Property Name="id_dep" Type="int" Nullable="false" />
+          <Property Name="NameDepartament" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="id_emp" />
+          </Key>
+          <Property Name="id_emp" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="SecondName" Type="nvarchar(max)" />
+          <Property Name="Patronymic" Type="nvarchar(max)" />
+          <Property Name="post_id" Type="int" />
+          <Property Name="dep_id" Type="int" />
+          <Property Name="Experience" Type="int" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="int" Nullable="false" />
+          <Property Name="PostName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar(max)" />
+          <Property Name="UserPassword" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Employe_Departament">
+          <End Role="Departament" Type="Self.Departament" Multiplicity="0..1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departament">
+              <PropertyRef Name="id_dep" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="id_post" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ShahanovModelContainer">
+          <EntitySet Name="Departament" EntityType="Self.Departament" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employe_Departament" Association="Self.FK_Employe_Departament">
+            <End Role="Departament" EntitySet="Departament" />
+            <End Role="Employe" EntitySet="Employe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employe_Post" Association="Self.FK_Employe_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employe" EntitySet="Employe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShahanovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departament">
+          <Key>
+            <PropertyRef Name="id_dep" />
+          </Key>
+          <Property Name="id_dep" Type="Int32" Nullable="false" />
+          <Property Name="NameDepartament" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Employe_Departament" FromRole="Departament" ToRole="Employe" />
+        </EntityType>
+        <EntityType Name="Employe">
+          <Key>
+            <PropertyRef Name="id_emp" />
+          </Key>
+          <Property Name="id_emp" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="post_id" Type="Int32" />
+          <Property Name="dep_id" Type="Int32" />
+          <Property Name="Experience" Type="Int32" />
+          <NavigationProperty Name="Departament" Relationship="Self.FK_Employe_Departament" FromRole="Employe" ToRole="Departament" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Employe_Post" FromRole="Employe" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="Int32" Nullable="false" />
+          <Property Name="PostName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employe" Relationship="Self.FK_Employe_Post" FromRole="Post" ToRole="Employe" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Employe_Departament">
+          <End Role="Departament" Type="Self.Departament" Multiplicity="0..1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departament">
+              <PropertyRef Name="id_dep" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employe_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employe" Type="Self.Employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="id_post" />
+            </Principal>
+            <Dependent Role="Employe">
+              <PropertyRef Name="post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShahanovEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departament" EntityType="Self.Departament" />
+          <EntitySet Name="Employe" EntityType="Self.Employe" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Employe_Departament" Association="Self.FK_Employe_Departament">
+            <End Role="Departament" EntitySet="Departament" />
+            <End Role="Employe" EntitySet="Employe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employe_Post" Association="Self.FK_Employe_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employe" EntitySet="Employe" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="ShahanovModel.Users" />
+        </EntityContainer>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ShahanovModelContainer" CdmEntityContainer="ShahanovEntities">
+          <EntitySetMapping Name="Departament">
+            <EntityTypeMapping TypeName="ShahanovModel.Departament">
+              <MappingFragment StoreEntitySet="Departament">
+                <ScalarProperty Name="id_dep" ColumnName="id_dep" />
+                <ScalarProperty Name="NameDepartament" ColumnName="NameDepartament" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employe">
+            <EntityTypeMapping TypeName="ShahanovModel.Employe">
+              <MappingFragment StoreEntitySet="Employe">
+                <ScalarProperty Name="id_emp" ColumnName="id_emp" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="ShahanovModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="PostName" ColumnName="PostName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShahanovModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ShahanovModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
